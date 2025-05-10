@@ -7,10 +7,15 @@ function calculateAge() {
     var month = today.getMonth() - birthdate.getMonth();
     var day = today.getDate() - birthdate.getDate();
 
-    if(today.getMonth() < birthdate.getMonth() || (today.getMonth() === birthdate.getMonth() && today.getDate() < birthdate.getDate())){
-        age--;
-        month = 12 + today.getMonth() - birthdate.getMonth();
-        dat = today.getDate() - birthdate.getDate();
+    if (day < 0) {
+        month--;
+        var prevMonth = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+        day += prevMonth;
     }
-document.getElementById('result').innerHTML = "Your age is:" + age + "years, " + month + "months and " + day + "days";
+    if (month < 0) {
+        month += 12;
+        age--;
+    }
+    document.getElementById('result').innerHTML = 
+        "Your age is: " + age + " years, " + month + " months and " + day + " days.";
 }
